@@ -7,8 +7,7 @@ namespace BattleshipsGame
 
     interface AttackInterface
     {
-        void Hit();
-        void Miss();
+        bool Attack();
         GridSquareStatus CheckStatus();
     }
 
@@ -54,7 +53,7 @@ namespace BattleshipsGame
             return Status;
         }
 
-        public virtual void Hit()
+        protected virtual void Hit()
         {
             Status = GridSquareStatus.HIT;
             OnChanged(EventArgs.Empty);
@@ -70,6 +69,20 @@ namespace BattleshipsGame
         {
             Status = GridSquareStatus.MISS;
         }
+
+        public virtual bool Attack()
+        {
+            if(GetType() == typeof(HullComponent))
+            {
+                Hit();
+                return true;
+            }
+            else
+            {
+                Miss();
+                return false;
+            }
+        }
     }
 
     class HullComponent : GridSquare
@@ -84,12 +97,6 @@ namespace BattleshipsGame
         public ShipType GetShipType()
         {
             return ship.ShipType;
-        }
-
-        public override void Hit()
-        {
-            base.Hit();
-            CheckStatus();
         }
 
         public override GridSquareStatus CheckStatus()

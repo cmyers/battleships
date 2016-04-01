@@ -19,20 +19,16 @@ namespace BattleshipsGame
         public bool Fire(int x, int y, GameGrid enemyGrid)
         {
             AttackInterface gridSqr = enemyGrid.GetGridSquare(y, x);
-            if (enemyGrid.GetGridSquare(y, x) != null)
+            if (gridSqr != null)
             {
                 BattleGrid.AddGridSquare(gridSqr);
-                gridSqr.Hit();
-                return true;
             }
             else
             {
-                AttackInterface gridMiss = new GridSquare(y, x);
-                gridMiss.Miss();
-                BattleGrid.AddGridSquare(gridMiss);
-                enemyGrid.AddGridSquare(gridMiss);
-                return false;
+                gridSqr = new GridSquare(y, x);
+                BattleGrid.AddGridSquare(gridSqr);
             }
+            return gridSqr.Attack();
         }
 
         public void AddShip(Ship ship)
