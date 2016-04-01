@@ -47,7 +47,6 @@ namespace BattleshipsGame
             int test = random.Next(0, 2);
             Orientation orientation = (Orientation)test;
 
-
             if (CheckPlacement(orientation, shipType, headX, headY))
             {
                 HullComponent hullComponent;

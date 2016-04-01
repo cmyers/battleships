@@ -5,6 +5,30 @@ using System;
 namespace BattleshipsGame
 {
 
+    class GameGrid
+    {
+        private GridSquare[,] grid = new GridSquare[10, 10];
+
+        public GameGrid()
+        {
+
+        }
+
+        public GridSquare GetGridSquare(int y, int x)
+        {
+            if (y < 0 || y > 9 || x < 0 || x > 9)
+            {
+                return null;
+            }
+            return grid[y, x];
+        }
+
+        public void AddGridSquare(GridSquare gridSquare)
+        {
+            grid[gridSquare.Y, gridSquare.X] = gridSquare;
+        }
+    }
+
     class GridSquare
     {
         public int X { get; set; }
@@ -91,29 +115,5 @@ namespace BattleshipsGame
         {
             return Hull.Any(x => x.Status == GridSquareStatus.NONE);
         }
-    }
-
-    class GameGrid
-    {
-        private GridSquare[,] grid = new GridSquare[10, 10];
-
-        public GameGrid()
-        {
-
-        }
-
-        public GridSquare GetGridSquare(int y, int x)
-        {
-            if(y < 0 || y > 9 || x < 0 || x > 9)
-            {
-                return null;
-            }
-            return grid[y, x];
-        }
-
-        public void AddGridSquare(GridSquare gridSquare)
-        {
-            grid[gridSquare.Y, gridSquare.X] = gridSquare;
-        }   
     }
 }
