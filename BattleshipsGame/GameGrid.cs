@@ -65,7 +65,7 @@ namespace BattleshipsGame
                 HitEvent(this, e);
         }
 
-        public virtual void Miss()
+        protected virtual void Miss()
         {
             Status = GridSquareStatus.MISS;
         }
