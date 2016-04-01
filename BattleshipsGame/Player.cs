@@ -27,8 +27,10 @@ namespace BattleshipsGame
             }
             else
             {
-                BattleGrid.AddGridSquare(new GridSquare(y, x));
-                BattleGrid.GetGridSquare(y, x).Miss();
+                AttackInterface gridMiss = new GridSquare(y, x);
+                gridMiss.Miss();
+                BattleGrid.AddGridSquare(gridMiss);
+                enemyGrid.AddGridSquare(gridMiss);
                 return false;
             }
         }

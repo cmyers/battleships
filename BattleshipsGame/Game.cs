@@ -140,14 +140,14 @@ namespace BattleshipsGame
                 {
                     if (p1.PlayerGrid.GetGridSquare(y, x) != null)
                     {
-                        HullComponent hc = (HullComponent)p1.PlayerGrid.GetGridSquare(y, x);
-                        if (hc.CheckStatus() == GridSquareStatus.NONE)
+                        AttackInterface gridRef = p1.PlayerGrid.GetGridSquare(y, x);
+                        if (gridRef.CheckStatus() == GridSquareStatus.NONE)
                         {
-                            Console.Write(" " + hc.GetShipType().ToString().First() + " ");
+                            Console.Write(" " + ((HullComponent)gridRef).GetShipType().ToString().First() + " ");
                         }
                         else
                         {
-                            Console.Write(" " + hc.CheckStatus().ToString().First() + " ");
+                            Console.Write(" " + gridRef.CheckStatus().ToString().First() + " ");
                         }                      
                     }
                     else
@@ -165,14 +165,14 @@ namespace BattleshipsGame
                 {
                     if (cpu.PlayerGrid.GetGridSquare(y, x) != null)
                     {
-                        HullComponent hc = (HullComponent)cpu.PlayerGrid.GetGridSquare(y, x);
-                        if (hc.CheckStatus() == GridSquareStatus.NONE)
+                        AttackInterface gridRef = cpu.PlayerGrid.GetGridSquare(y, x);
+                        if (gridRef.CheckStatus() == GridSquareStatus.NONE)
                         {
-                            Console.Write(" " + hc.GetShipType().ToString().First() + " ");
+                            Console.Write(" " + ((HullComponent)gridRef).GetShipType().ToString().First() + " ");
                         }
                         else
                         {
-                            Console.Write(" " + hc.CheckStatus().ToString().First() + " ");
+                            Console.Write(" " + gridRef.CheckStatus().ToString().First() + " ");
                         }
                     }
                     else
