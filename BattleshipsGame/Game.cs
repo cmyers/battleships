@@ -147,6 +147,7 @@ namespace BattleshipsGame
                         }
                         else
                         {
+                            hc.CheckSunk();
                             Console.Write(" " + hc.Status.ToString().First() + " ");
                         }
                         
@@ -174,6 +175,7 @@ namespace BattleshipsGame
                         }
                         else
                         {
+                            hc.CheckSunk();
                             Console.Write(" " + hc.Status.ToString().First() + " ");
                         }
                     }

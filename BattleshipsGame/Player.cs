@@ -19,7 +19,7 @@ namespace BattleshipsGame
         public bool Fire(int x, int y, GameGrid enemyGrid)
         {
             bool hit = false;
-            GridSquare gridSqr = enemyGrid.GetGridSquare(y, x);
+            AttackInterface gridSqr = enemyGrid.GetGridSquare(y, x);
             if (enemyGrid.GetGridSquare(y, x) != null)
             {
                 hit = true;

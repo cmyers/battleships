@@ -5,16 +5,24 @@ using System;
 namespace BattleshipsGame
 {
 
+    interface AttackInterface
+    {
+        void Hit();
+        void Miss();
+        GridSquareStatus Status { get; }
+    }
+
+
     class GameGrid
     {
-        private GridSquare[,] grid = new GridSquare[10, 10];
+        private AttackInterface[,] grid = new GridSquare[10, 10];
 
         public GameGrid()
         {
 
         }
 
-        public GridSquare GetGridSquare(int y, int x)
+        public AttackInterface GetGridSquare(int y, int x)
         {
             if (y < 0 || y > 9 || x < 0 || x > 9)
             {
@@ -23,17 +31,17 @@ namespace BattleshipsGame
             return grid[y, x];
         }
 
-        public void AddGridSquare(GridSquare gridSquare)
+        public void AddGridSquare(AttackInterface gridSquare)
         {
-            grid[gridSquare.Y, gridSquare.X] = gridSquare;
+            grid[((GridSquare)gridSquare).Y, ((GridSquare)gridSquare).X] = gridSquare;
         }
     }
 
-    class GridSquare
+    class GridSquare : AttackInterface
     {
         public int X { get; set; }
         public int Y { get; set; }
-        public GridSquareStatus Status { get; set; } = GridSquareStatus.NONE;
+        public GridSquareStatus Status { get; protected set; } = GridSquareStatus.NONE;
         public event EventHandler HitEvent;
 
         public GridSquare(int headY, int headX)
@@ -68,15 +76,25 @@ namespace BattleshipsGame
         {
             this.ship = ship;
         }
-        
-        public bool CheckSunk()
-        {
-            return ship.Sunk;
-        } 
 
         public ShipType GetShipType()
         {
             return ship.ShipType;
+        }
+
+        public override void Hit()
+        {
+            base.Hit();
+            CheckSunk();
+        }
+
+        public bool CheckSunk()
+        {
+            if(ship.Sunk)
+            {
+                Status = GridSquareStatus.SUNK;
+            }
+            return ship.Sunk;
         }
 
         //could implement armor or levels of damage later
@@ -102,13 +120,6 @@ namespace BattleshipsGame
         private void HullComponent_HitEvent(object sender, EventArgs e)
         {
             Sunk = !CheckAlive();
-            if(Sunk)
-            {
-                foreach(HullComponent h in Hull)
-                {
-                    h.Status = GridSquareStatus.SUNK;
-                }
-            }
         }
 
         private bool CheckAlive()
