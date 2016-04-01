@@ -9,9 +9,8 @@ namespace BattleshipsGame
     {
         void Hit();
         void Miss();
-        GridSquareStatus Status { get; }
+        GridSquareStatus CheckStatus();
     }
-
 
     class GameGrid
     {
@@ -41,13 +40,18 @@ namespace BattleshipsGame
     {
         public int X { get; set; }
         public int Y { get; set; }
-        public GridSquareStatus Status { get; protected set; } = GridSquareStatus.NONE;
+        protected GridSquareStatus Status = GridSquareStatus.NONE;
         public event EventHandler HitEvent;
 
         public GridSquare(int headY, int headX)
         {
             X = headX;
             Y = headY;
+        }
+
+        public virtual GridSquareStatus CheckStatus()
+        {
+            return Status;
         }
 
         public virtual void Hit()
@@ -85,16 +89,16 @@ namespace BattleshipsGame
         public override void Hit()
         {
             base.Hit();
-            CheckSunk();
+            CheckStatus();
         }
 
-        public bool CheckSunk()
+        public override GridSquareStatus CheckStatus()
         {
-            if(ship.Sunk)
+            if (ship.Sunk && Status != GridSquareStatus.SUNK)
             {
                 Status = GridSquareStatus.SUNK;
             }
-            return ship.Sunk;
+            return Status;
         }
 
         //could implement armor or levels of damage later
@@ -124,7 +128,7 @@ namespace BattleshipsGame
 
         private bool CheckAlive()
         {
-            return Hull.Any(x => x.Status == GridSquareStatus.NONE);
+            return Hull.Any(x => x.CheckStatus() == GridSquareStatus.NONE);
         }
     }
 }

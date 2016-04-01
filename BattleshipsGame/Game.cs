@@ -26,13 +26,13 @@ namespace BattleshipsGame
                     if (p1.PlayerGrid.GetGridSquare(y, x) != null)
                     {
                         HullComponent hc = (HullComponent)p1.PlayerGrid.GetGridSquare(y, x);
-                        if (hc.Status == GridSquareStatus.NONE)
+                        if (hc.CheckStatus() == GridSquareStatus.NONE)
                         {
                             Console.Write(" " + hc.GetShipType().ToString().First() + " ");
                         }
                         else
                         {
-                            Console.Write(" " + hc.Status.ToString().First() + " ");
+                            Console.Write(" " + hc.CheckStatus().ToString().First() + " ");
                         }
 
 
@@ -53,13 +53,13 @@ namespace BattleshipsGame
                     if (cpu.PlayerGrid.GetGridSquare(y, x) != null)
                     {
                         HullComponent hc = (HullComponent)cpu.PlayerGrid.GetGridSquare(y, x);
-                        if (hc.Status == GridSquareStatus.NONE)
+                        if (hc.CheckStatus() == GridSquareStatus.NONE)
                         {
                             Console.Write(" " + hc.GetShipType().ToString().First() + " ");
                         }
                         else
                         {
-                            Console.Write(" " + hc.Status.ToString().First() + " ");
+                            Console.Write(" " + hc.CheckStatus().ToString().First() + " ");
                         }
                     }
                     else
@@ -106,7 +106,7 @@ namespace BattleshipsGame
                 {
                     if (p1.BattleGrid.GetGridSquare(y, x) != null)
                     {
-                        Console.Write(" " + p1.BattleGrid.GetGridSquare(y, x).Status.ToString().First() + " ");
+                        Console.Write(" " + p1.BattleGrid.GetGridSquare(y, x).CheckStatus().ToString().First() + " ");
                     }
                     else
                     {
@@ -123,7 +123,7 @@ namespace BattleshipsGame
                 {
                     if (cpu.BattleGrid.GetGridSquare(y, x) != null)
                     {
-                        Console.Write(" " + cpu.BattleGrid.GetGridSquare(y, x).Status.ToString().First() + " ");
+                        Console.Write(" " + cpu.BattleGrid.GetGridSquare(y, x).CheckStatus().ToString().First() + " ");
                     }
                     else
                     {
@@ -141,17 +141,14 @@ namespace BattleshipsGame
                     if (p1.PlayerGrid.GetGridSquare(y, x) != null)
                     {
                         HullComponent hc = (HullComponent)p1.PlayerGrid.GetGridSquare(y, x);
-                        if (hc.Status == GridSquareStatus.NONE)
+                        if (hc.CheckStatus() == GridSquareStatus.NONE)
                         {
                             Console.Write(" " + hc.GetShipType().ToString().First() + " ");
                         }
                         else
                         {
-                            hc.CheckSunk();
-                            Console.Write(" " + hc.Status.ToString().First() + " ");
-                        }
-                        
-
+                            Console.Write(" " + hc.CheckStatus().ToString().First() + " ");
+                        }                      
                     }
                     else
                     {
@@ -169,14 +166,13 @@ namespace BattleshipsGame
                     if (cpu.PlayerGrid.GetGridSquare(y, x) != null)
                     {
                         HullComponent hc = (HullComponent)cpu.PlayerGrid.GetGridSquare(y, x);
-                        if (hc.Status == GridSquareStatus.NONE)
+                        if (hc.CheckStatus() == GridSquareStatus.NONE)
                         {
                             Console.Write(" " + hc.GetShipType().ToString().First() + " ");
                         }
                         else
                         {
-                            hc.CheckSunk();
-                            Console.Write(" " + hc.Status.ToString().First() + " ");
+                            Console.Write(" " + hc.CheckStatus().ToString().First() + " ");
                         }
                     }
                     else
