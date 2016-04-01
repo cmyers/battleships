@@ -27,6 +27,7 @@ namespace BattleshipsGame
             {
                 gridSqr = new GridSquare(y, x);
                 BattleGrid.AddGridSquare(gridSqr);
+                enemyGrid.AddGridSquare(gridSqr);
             }
             return gridSqr.Attack();
         }
@@ -99,6 +100,7 @@ namespace BattleshipsGame
                     && PlayerGrid.GetGridSquare(headY, headX - 1) == null
                     && PlayerGrid.GetGridSquare(headY, headX + 1) == null
                     )
+                {
                     switch (orientation)
                     {
                         case Orientation.HORIZONAL:
@@ -108,12 +110,12 @@ namespace BattleshipsGame
                             headY++;
                             break;
                     }
+                }
                 else
                 {
                     return false;
                 }
             }
-
             return true;
         }
 
