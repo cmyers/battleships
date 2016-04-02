@@ -25,7 +25,6 @@ namespace BattleshipsGame
             player.CreateShip(ShipType.DESTROYER);
             player.CreateShip(ShipType.DESTROYER);
             GameLoop();
-            Console.ReadKey();
             return true;
         }
 

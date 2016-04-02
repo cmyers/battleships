@@ -9,7 +9,6 @@ namespace BattleshipsGame
             //GameTest game = new GameTest();
             Game game = new Game();
             game.StartGame();
-            //Console.Clear();
             Console.ReadKey();
         }
     }
