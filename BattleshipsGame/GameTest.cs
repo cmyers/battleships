@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace BattleshipsGame
 {
-    class Game
+    class GameTest
     {
         public Player p1 { get; private set; } = new Player();
         public Player cpu { get; private set; } = new Player();
@@ -34,8 +34,6 @@ namespace BattleshipsGame
                         {
                             Console.Write(" " + hc.CheckStatus().ToString().First() + " ");
                         }
-
-
                     }
                     else
                     {

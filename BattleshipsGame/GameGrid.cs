@@ -115,7 +115,7 @@ namespace BattleshipsGame
     {
         private List<HullComponent> Hull = new List<HullComponent>();
         public ShipType ShipType { get; private set; }
-        public bool Sunk { get; private set; }
+        public bool Sunk { get; private set; } = false;
 
         public Ship(ShipType shipType)
         {
