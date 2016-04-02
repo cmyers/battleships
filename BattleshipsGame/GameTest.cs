@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace BattleshipsGame
 {
-    class Game
+    class GameTest
     {
         public Player p1 { get; private set; } = new Player();
         public Player cpu { get; private set; } = new Player();
 
-        public Game()
+        public GameTest()
         {
             p1.CreateShip(ShipType.BATTLESHIP);
             p1.CreateShip(ShipType.DESTROYER);
