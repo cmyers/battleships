@@ -116,6 +116,7 @@ namespace BattleshipsGame
         private List<HullComponent> Hull = new List<HullComponent>();
         public ShipType ShipType { get; private set; }
         public bool Sunk { get; private set; }
+        public Guid ShipID { get; private set; } = Guid.NewGuid();
 
         public Ship(ShipType shipType)
         {

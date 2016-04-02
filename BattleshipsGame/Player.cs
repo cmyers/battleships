@@ -6,14 +6,15 @@ namespace BattleshipsGame
 {
     class Player
     {
+        public string Name { get; private set; }
         public GameGrid PlayerGrid { get; } = new GameGrid();
         public GameGrid BattleGrid { get; } = new GameGrid();
         private List<Ship> ships = new List<Ship>();
         private static Random random = new Random();
 
-        public Player()
+        public Player(string name)
         {
-
+            Name = name;
         }
 
         public bool Fire(int x, int y, GameGrid enemyGrid)
@@ -30,11 +31,6 @@ namespace BattleshipsGame
                 enemyGrid.AddGridSquare(gridSqr);
             }
             return gridSqr.Attack();
-        }
-
-        public void AddShip(Ship ship)
-        {
-            ships.Add(ship);
         }
 
         public void CreateShip(ShipType shipType)

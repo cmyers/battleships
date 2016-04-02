@@ -5,183 +5,60 @@ namespace BattleshipsGame
 {
     class GameTest
     {
-        public Player p1 { get; private set; } = new Player();
-        public Player cpu { get; private set; } = new Player();
+        private Player cpuPlayer1 = new Player("CPU Player 1");
+        private Player cpuPlayer2 = new Player("CPU Player 2");
 
         public GameTest()
         {
-            p1.CreateShip(ShipType.BATTLESHIP);
-            p1.CreateShip(ShipType.DESTROYER);
-            p1.CreateShip(ShipType.DESTROYER);
+            cpuPlayer1.CreateShip(ShipType.BATTLESHIP);
+            cpuPlayer1.CreateShip(ShipType.DESTROYER);
+            cpuPlayer1.CreateShip(ShipType.DESTROYER);
 
-            cpu.CreateShip(ShipType.BATTLESHIP);
-            cpu.CreateShip(ShipType.DESTROYER);
-            cpu.CreateShip(ShipType.DESTROYER);
+            cpuPlayer2.CreateShip(ShipType.BATTLESHIP);
+            cpuPlayer2.CreateShip(ShipType.DESTROYER);
+            cpuPlayer2.CreateShip(ShipType.DESTROYER);
 
-            Console.WriteLine("Player's Grid");
-            for (int y = 0; y < 10; y++)
-            {
-                for (int x = 0; x < 10; x++)
-                {
-                    if (p1.PlayerGrid.GetGridSquare(y, x) != null)
-                    {
-                        HullComponent hc = (HullComponent)p1.PlayerGrid.GetGridSquare(y, x);
-                        if (hc.CheckStatus() == GridSquareStatus.NONE)
-                        {
-                            Console.Write(" " + hc.GetShipType().ToString().First() + " ");
-                        }
-                        else
-                        {
-                            Console.Write(" " + hc.CheckStatus().ToString().First() + " ");
-                        }
+            GameTestStart();
+        }
 
-
-                    }
-                    else
-                    {
-                        Console.Write(" - ");
-                    }
-                }
-                Console.WriteLine();
-            }
-
-            Console.WriteLine("CPU");
-            for (int y = 0; y < 10; y++)
-            {
-                for (int x = 0; x < 10; x++)
-                {
-                    if (cpu.PlayerGrid.GetGridSquare(y, x) != null)
-                    {
-                        HullComponent hc = (HullComponent)cpu.PlayerGrid.GetGridSquare(y, x);
-                        if (hc.CheckStatus() == GridSquareStatus.NONE)
-                        {
-                            Console.Write(" " + hc.GetShipType().ToString().First() + " ");
-                        }
-                        else
-                        {
-                            Console.Write(" " + hc.CheckStatus().ToString().First() + " ");
-                        }
-                    }
-                    else
-                    {
-                        Console.Write(" - ");
-                    }
-                }
-                Console.WriteLine();
-            }
-
-
+        public void GameTestStart()
+        {
             //test game!
+            ConsoleDisplay.ShowPlayerGrid(cpuPlayer1);
+            ConsoleDisplay.ShowPlayerGrid(cpuPlayer2);
+
             bool gameOver = false;
             for (int y = 0; y < 10; y++)
             {
-                for(int x = 0; x < 10; x++)
+                for (int x = 0; x < 10; x++)
                 {
-                    p1.Fire(y, x, cpu.PlayerGrid);
-                    cpu.Fire(y, x, p1.PlayerGrid);
-                    if (!cpu.CheckFleet())
+                    cpuPlayer1.Fire(y, x, cpuPlayer2.PlayerGrid);
+                    cpuPlayer2.Fire(y, x, cpuPlayer1.PlayerGrid);
+                    if (!cpuPlayer2.CheckFleet())
                     {
                         Console.WriteLine("Game Over, P1 wins!");
                         gameOver = true;
                         break;
                     }
-                    if (!p1.CheckFleet())
+                    if (!cpuPlayer1.CheckFleet())
                     {
-                        Console.WriteLine("Game Over, CPU wins!");
+                        Console.WriteLine("Game Over, P2 wins!");
                         gameOver = true;
                         break;
                     }
                 }
-                if(gameOver)
+                if (gameOver)
                 {
                     break;
                 }
 
             }
 
-            Console.WriteLine("Player BattleGrid");
-            for (int y = 0; y < 10; y++)
-            {
-                for (int x = 0; x < 10; x++)
-                {
-                    if (p1.BattleGrid.GetGridSquare(y, x) != null)
-                    {
-                        Console.Write(" " + p1.BattleGrid.GetGridSquare(y, x).CheckStatus().ToString().First() + " ");
-                    }
-                    else
-                    {
-                        Console.Write(" - ");
-                    }
-                }
-                Console.WriteLine();
-            }
+            ConsoleDisplay.ShowPlayerBattleGrid(cpuPlayer1);
+            ConsoleDisplay.ShowPlayerBattleGrid(cpuPlayer2);
 
-            Console.WriteLine("CPU BattleGrid");
-            for (int y = 0; y < 10; y++)
-            {
-                for (int x = 0; x < 10; x++)
-                {
-                    if (cpu.BattleGrid.GetGridSquare(y, x) != null)
-                    {
-                        Console.Write(" " + cpu.BattleGrid.GetGridSquare(y, x).CheckStatus().ToString().First() + " ");
-                    }
-                    else
-                    {
-                        Console.Write(" - ");
-                    }
-                }
-                Console.WriteLine();
-            }
-
-            Console.WriteLine("Player's Grid");
-            for (int y = 0; y < 10; y++)
-            {
-                for (int x = 0; x < 10; x++)
-                {
-                    if (p1.PlayerGrid.GetGridSquare(y, x) != null)
-                    {
-                        AttackInterface gridRef = p1.PlayerGrid.GetGridSquare(y, x);
-                        if (gridRef.CheckStatus() == GridSquareStatus.NONE)
-                        {
-                            Console.Write(" " + ((HullComponent)gridRef).GetShipType().ToString().First() + " ");
-                        }
-                        else
-                        {
-                            Console.Write(" " + gridRef.CheckStatus().ToString().First() + " ");
-                        }                      
-                    }
-                    else
-                    {
-                        Console.Write(" - ");
-                    }
-                }
-                Console.WriteLine();
-            }
-
-            Console.WriteLine("CPU");
-            for (int y = 0; y < 10; y++)
-            {
-                for (int x = 0; x < 10; x++)
-                {
-                    if (cpu.PlayerGrid.GetGridSquare(y, x) != null)
-                    {
-                        AttackInterface gridRef = cpu.PlayerGrid.GetGridSquare(y, x);
-                        if (gridRef.CheckStatus() == GridSquareStatus.NONE)
-                        {
-                            Console.Write(" " + ((HullComponent)gridRef).GetShipType().ToString().First() + " ");
-                        }
-                        else
-                        {
-                            Console.Write(" " + gridRef.CheckStatus().ToString().First() + " ");
-                        }
-                    }
-                    else
-                    {
-                        Console.Write(" - ");
-                    }
-                }
-                Console.WriteLine();
-            }
+            ConsoleDisplay.ShowPlayerGrid(cpuPlayer1);
+            ConsoleDisplay.ShowPlayerGrid(cpuPlayer2);
         }
         
     }
