@@ -6,7 +6,7 @@ namespace BattleshipsGame
     {
         static void Main(string[] args)
         {
-            GameTest game = new GameTest();
+            Game game = new Game();
             //Console.Clear();
             Console.ReadKey();
         }

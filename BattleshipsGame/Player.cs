@@ -32,6 +32,11 @@ namespace BattleshipsGame
             return gridSqr.Attack();
         }
 
+        public void AddShip(Ship ship)
+        {
+            ships.Add(ship);
+        }
+
         public void CreateShip(ShipType shipType)
         {
             Ship ship = new Ship(shipType);
