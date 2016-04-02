@@ -22,7 +22,14 @@ namespace BattleshipsGame
             AttackInterface gridSqr = enemyGrid.GetGridSquare(y, x);
             if (gridSqr != null)
             {
-                BattleGrid.AddGridSquare(gridSqr);
+                if (gridSqr.CheckStatus() == GridSquareStatus.NONE)
+                {
+                    BattleGrid.AddGridSquare(gridSqr);
+                }
+                else
+                {
+                    throw new ArgumentException();
+                }
             }
             else
             {

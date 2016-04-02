@@ -67,7 +67,15 @@ namespace BattleshipsGame
                             Console.ReadKey();
                             continue;
                         }
-                        bool hit = player.Fire(x, y, cpu.PlayerGrid);
+                        bool hit = false;
+                        try
+                        {
+                            hit = player.Fire(x, y, cpu.PlayerGrid);
+                        }
+                        catch(ArgumentException e)
+                        {
+                            Console.WriteLine("You've already fired at this location!");
+                        }
                         if (hit)
                         {
                             Console.WriteLine("HIT!");
