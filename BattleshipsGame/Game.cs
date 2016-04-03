@@ -92,7 +92,14 @@ namespace BattleshipsGame
                         }
                         x = random.Next(0, 10);
                         y = random.Next(0, 10);
-                        hit = cpu.Fire(x, y, player.PlayerGrid);
+                        try
+                        {
+                            hit = cpu.Fire(x, y, player.PlayerGrid);
+                        }
+                        catch (ArgumentException e)
+                        {
+                            //TODO: ideally we need to try a different coord,
+                        }
                         if (hit)
                         {
                             Console.WriteLine("One of your Ships was HIT!");
