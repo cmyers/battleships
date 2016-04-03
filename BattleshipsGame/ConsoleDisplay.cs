@@ -17,7 +17,7 @@ namespace BattleshipsGame
                     {
                         if (x >= 0)
                         {
-                            AttackInterface gridRef = player.PlayerGrid.GetGridSquare(y, x);
+                            IAttack gridRef = player.PlayerGrid.GetGridSquare(y, x);
                             if (gridRef != null)
                             {
                                 if (gridRef.CheckStatus() == GridSquareStatus.NONE)

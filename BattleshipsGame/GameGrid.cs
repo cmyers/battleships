@@ -5,7 +5,7 @@ using System;
 namespace BattleshipsGame
 {
 
-    interface AttackInterface
+    interface IAttack
     {
         bool Attack();
         GridSquareStatus CheckStatus();
@@ -13,14 +13,14 @@ namespace BattleshipsGame
 
     class GameGrid
     {
-        private AttackInterface[,] grid = new GridSquare[10, 10];
+        private IAttack[,] grid = new GridSquare[10, 10];
 
         public GameGrid()
         {
 
         }
 
-        public AttackInterface GetGridSquare(int y, int x)
+        public IAttack GetGridSquare(int y, int x)
         {
             if (y < 0 || y > 9 || x < 0 || x > 9)
             {
@@ -29,13 +29,13 @@ namespace BattleshipsGame
             return grid[y, x];
         }
 
-        public void AddGridSquare(AttackInterface gridSquare)
+        public void AddGridSquare(IAttack gridSquare)
         {
             grid[((GridSquare)gridSquare).Y, ((GridSquare)gridSquare).X] = gridSquare;
         }
     }
 
-    class GridSquare : AttackInterface
+    class GridSquare : IAttack
     {
         public int X { get; set; }
         public int Y { get; set; }
